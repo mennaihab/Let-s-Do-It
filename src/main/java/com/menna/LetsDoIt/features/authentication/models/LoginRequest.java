@@ -1,3 +1,5 @@
 package com.menna.LetsDoIt.features.authentication.models;
 
-public record LoginRequest(String email,String password){}
+import jakarta.validation.constraints.Email;
+
+public record LoginRequest(@Email String email, String password){}
