@@ -24,7 +24,7 @@ public class ApplicationSecurity {
 			return http
                     .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(authorize -> authorize
-                            .requestMatchers("/auth/**")
+                            .requestMatchers("/api/auth/**")
                             .permitAll()
                             .anyRequest()
                             .authenticated()

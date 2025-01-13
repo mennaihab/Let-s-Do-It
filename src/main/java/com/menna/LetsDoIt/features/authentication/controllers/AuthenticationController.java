@@ -14,18 +14,23 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@Valid @ModelAttribute RegistrationRequest request) throws Exception {
-        return ResponseEntity.ok().body(authenticationService.register(request));
+    public String register(@Valid @ModelAttribute RegistrationRequest request) throws Exception {
+        return authenticationService.register(request);
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@Valid @ModelAttribute LoginRequest request) {
         return ResponseEntity.ok().body(authenticationService.login(request));
+    }
+
+    @GetMapping("/confirm")
+    public String confirmEmail(@RequestParam("confirmationToken") String confirmationToken) {
+        return authenticationService.confirm(confirmationToken);
     }
 }
